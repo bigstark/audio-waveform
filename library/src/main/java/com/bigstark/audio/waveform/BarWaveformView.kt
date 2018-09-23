@@ -75,6 +75,7 @@ class BarWaveformView : BaseWaveformView {
         val right = left + rectWidth
 
         canvas.drawRect(left, top, right, bottom, paint)
+        canvas.drawRoundRect(left, top, right, bottom, 5f, 5f, paint)
         if (drawLine) {
             val lineBottom = (height - ZERO_HEIGHT) / 2
             val lineTop = lineBottom + ZERO_HEIGHT
