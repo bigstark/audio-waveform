@@ -6,6 +6,9 @@ import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.R.attr.animation
+
+
 
 
 class BarWaveformView : BaseWaveformView {
@@ -26,11 +29,11 @@ class BarWaveformView : BaseWaveformView {
             postInvalidate()
         }
 
-    private var fraction = 0f;
+    private var fraction = 0f
     private val animator = ValueAnimator.ofInt(0, 1).apply {
         duration = ENQUEUE_DELAYED_TIME
         addUpdateListener { animation ->
-            fraction = animation.animatedFraction
+            fraction = DisplayUtils.getSpringEasing(animation.animatedFraction.toDouble()).toFloat()
             postInvalidate()
         }
     }
