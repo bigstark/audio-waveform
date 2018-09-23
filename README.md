@@ -17,7 +17,7 @@ allprojects {
 ```
 ```
 dependencies {
-     implementation 'com.github.bigstark:audio-waveform:0.2.0'
+     implementation 'com.github.bigstark:audio-waveform:0.2.1'
 }
 ```
 
