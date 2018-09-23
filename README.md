@@ -3,7 +3,7 @@
 
 ## BarWaveformView
 
-[BarWaveformView](https://github.com/bigstark/audio-waveform/blob/master/bar-waveform-view.gif)
+![BarWaveformView](https://github.com/bigstark/audio-waveform/blob/master/bar-waveform-view.gif)
 
 ## Include your project
 
