@@ -7,10 +7,12 @@ android {
 
 
     defaultConfig {
-        minSdkVersion 21
+        minSdkVersion 14
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+
+        versionCode project.VERSION_CODE as Integer
+        versionName project.VERSION_NAME as String
+        group = project.GROUP as String
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
