@@ -8,7 +8,7 @@ abstract class BaseWaveformView : View {
 
     companion object {
         const val DEFAULT_AMPLITUDES_SIZE = 30
-        const val ENQUEUE_DELAYED_TIME = 100
+        const val ENQUEUE_DELAYED_TIME = 500L
     }
     private val DEFAULT_DIRECTION = WaveDirection.RIGHT_TO_LEFT
 
@@ -67,7 +67,10 @@ abstract class BaseWaveformView : View {
             }
         }
 
+        onPutAmplitude(amplitude)
         postInvalidate()
     }
+
+    abstract fun onPutAmplitude(amplitude: Int)
 
 }

@@ -1,11 +1,11 @@
 package com.bigstark.audio.waveform
 
+import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.Log
 
 
 class BarWaveformView : BaseWaveformView {
@@ -26,6 +26,15 @@ class BarWaveformView : BaseWaveformView {
             postInvalidate()
         }
 
+    private var fraction = 0f;
+    private val animator = ValueAnimator.ofInt(0, 1).apply {
+        duration = ENQUEUE_DELAYED_TIME
+        addUpdateListener { animation ->
+            fraction = animation.animatedFraction
+            postInvalidate()
+        }
+    }
+
     private val paint: Paint = Paint()
 
     constructor(context: Context) : this(context, null)
@@ -42,6 +51,14 @@ class BarWaveformView : BaseWaveformView {
         paint.isAntiAlias = false
         paint.style = Paint.Style.FILL
         paint.color = color
+    }
+
+    override fun onPutAmplitude(amplitude: Int) {
+        if (animator.isRunning) {
+            animator.cancel()
+        }
+
+        animator.start()
     }
 
     override fun onDraw(canvas: Canvas?) {
@@ -69,12 +86,17 @@ class BarWaveformView : BaseWaveformView {
     }
 
     private fun drawBar(canvas: Canvas, index: Int, rectWidth: Float, rectHeight: Float, drawLine: Boolean) {
-        val bottom = (height - rectHeight) / 2
-        val top = rectHeight + bottom
+        var bottom = (height - rectHeight) / 2
+        var top = rectHeight + bottom
         val left = (index - 1) * (rectWidth + spacing)
         val right = left + rectWidth
 
-        canvas.drawRect(left, top, right, bottom, paint)
+        val initialPosition = if (direction == WaveDirection.LEFT_TO_RIGHT) 0 else amplitudesSize - 1
+        if (index == initialPosition && rectHeight != ZERO_HEIGHT) {
+            bottom = (height - rectHeight * fraction) / 2
+            top = bottom + rectHeight * fraction
+        }
+
         canvas.drawRoundRect(left, top, right, bottom, 5f, 5f, paint)
         if (drawLine) {
             val lineBottom = (height - ZERO_HEIGHT) / 2

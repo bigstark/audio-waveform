@@ -20,7 +20,7 @@ class SampleActivity : AppCompatActivity() {
         Thread {
             while(true) {
                 val number = Math.abs(random.nextInt()) % 100
-                Thread.sleep(64)
+                Thread.sleep(100)
                 runOnUiThread {
                     waveformView.putAmplitude(number)
                 }
