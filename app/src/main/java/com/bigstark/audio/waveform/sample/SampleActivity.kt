@@ -14,12 +14,16 @@ class SampleActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sample)
-        waveformView.spacing = 4f
-        waveformView.amplitudesSize = 20
-        waveformView.color = Color.parseColor("#DDDDDD")
+        waveformView.apply {
+            spacing = 4f
+            amplitudesSize = 20
+            color = Color.parseColor("#DDDDDD")
+            maxAmplitude = 100
+            direction = WaveDirection.RIGHT_TO_LEFT
+        }
         Thread {
             while(true) {
-                val number = Math.abs(random.nextInt()) % 100
+                val number = Math.abs(random.nextInt()) % waveformView.maxAmplitude
                 Thread.sleep(100)
                 runOnUiThread {
                     waveformView.putAmplitude(number)
