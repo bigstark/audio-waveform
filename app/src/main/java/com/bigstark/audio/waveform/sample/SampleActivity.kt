@@ -20,6 +20,7 @@ class SampleActivity : AppCompatActivity() {
             color = Color.parseColor("#DDDDDD")
             maxAmplitude = 100
             direction = WaveDirection.RIGHT_TO_LEFT
+            enqueueDelayedTime = 200
         }
         Thread {
             while(true) {

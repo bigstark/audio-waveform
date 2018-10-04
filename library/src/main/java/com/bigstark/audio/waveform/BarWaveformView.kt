@@ -31,7 +31,7 @@ class BarWaveformView : BaseWaveformView {
 
     private var fraction = 0f
     private val animator = ValueAnimator.ofInt(0, 1).apply {
-        duration = ENQUEUE_DELAYED_TIME
+        duration = enqueueDelayedTime
         addUpdateListener { animation ->
             fraction = DisplayUtils.getSpringEasing(animation.animatedFraction.toDouble()).toFloat()
             postInvalidate()
